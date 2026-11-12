@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">VERTEX Engine</title>
+  <desc id="desc">Seção de cordoalha trançada de cobre em painel técnico.</desc>
+  <defs>
+    <clipPath id="panel"><rect x="76" y="76" width="360" height="360" rx="68"/></clipPath>
+    <linearGradient id="copper" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff9a45"/><stop offset="1" stop-color="#c8642e"/></linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="104" fill="#082f4d"/>
+  <rect x="76" y="76" width="360" height="360" rx="68" fill="#fff"/>
+  <g clip-path="url(#panel)">
+    <rect x="104" y="108" width="304" height="58" rx="18" fill="#05263e"/>
+    <path d="M128 137h36l18-14 25 28 24-28 25 28 25-28 24 28 20-14h28" fill="none" stroke="url(#copper)" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="104" y="190" width="304" height="174" rx="28" fill="#eef4f6"/>
+    <path d="M111 330C167 274 202 274 256 330s91 56 145 0M111 282c56-56 91-56 145 0s91 56 145 0M111 234c56-56 91-56 145 0s91 56 145 0" fill="none" stroke="#c8642e" stroke-width="18" stroke-linecap="round"/>
+    <path d="M111 234c56 56 91 56 145 0s91-56 145 0M111 282c56 56 91 56 145 0s91-56 145 0M111 330c56 56 91 56 145 0s91-56 145 0" fill="none" stroke="#ff7900" stroke-width="12" stroke-linecap="round"/>
+    <rect x="142" y="379" width="228" height="42" rx="14" fill="#dfe9ed"/>
+    <text x="256" y="408" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="28" font-weight="700" fill="#082f4d">mm²</text>
+  </g>
+</svg>
