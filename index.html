@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#082f4d">
+  <meta name="description" content="Calculadora técnica VERTEX para cordoalhas trançadas de cobre.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <title>VERTEX Engine</title>
+  <style>
+    :root{--navy:#082f4d;--navy2:#05263e;--orange:#ff7900;--copper:#c8642e;--bg:#f3f6f7;--ink:#12364c;--muted:#61737a;--line:#d5dfe2;--card:#fff;--green:#2d8b80}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+    header{background:var(--navy2);color:#fff;border-bottom:4px solid var(--orange);padding:18px 16px;position:sticky;top:0;z-index:2}.brand{font-weight:800;letter-spacing:.12em;font-size:15px}.brand b{color:#ff9a45}.sub{font:11px monospace;color:#c4d7df;margin-top:6px}
+    main{max-width:760px;margin:auto;padding:18px 14px 36px}.card{background:var(--card);border:1px solid #d9e2e5;border-radius:10px;padding:16px;margin-bottom:14px;box-shadow:0 5px 18px #082f4d0d}h1{font-size:26px;line-height:1.05;margin:0 0 7px}h2{font-size:18px;margin:0 0 12px}.intro{color:var(--muted);font-size:13px;line-height:1.5}.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{display:flex;flex-direction:column;gap:6px;color:var(--muted);font-size:11px;font-weight:700}input,select,button{font:inherit}input,select{width:100%;min-height:44px;border:1px solid #cbd7da;border-radius:6px;background:#fff;color:var(--ink);padding:0 10px;font-size:16px}input:focus,select:focus{outline:0;border-color:var(--orange);box-shadow:0 0 0 3px #ff790022}button{border:0;border-radius:6px;min-height:44px;padding:0 14px;background:var(--orange);color:#fff;font-weight:700;cursor:pointer}button.secondary{background:var(--green)}button.outline{background:#fff;color:var(--navy);border:1px solid var(--line)}.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.hero-result{background:var(--navy);color:#fff;border-radius:8px;padding:16px;margin-top:14px}.hero-result small{display:block;color:#f3bd8c;font:10px monospace;text-transform:uppercase;letter-spacing:.1em}.hero-result strong{display:block;font-size:32px;margin:5px 0}.hero-result span{color:#c4d7df;font-size:12px}.results{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.result{background:#f8fbfb;border:1px solid var(--line);border-radius:7px;padding:11px;min-height:84px}.result small{display:block;color:var(--muted);font-size:10px}.result strong{display:block;margin-top:7px;font-size:17px}.notice{border-left:4px solid var(--orange);background:#fff5e9;color:#765b4a;padding:11px 12px;font-size:12px;line-height:1.45}.warning{border-left:4px solid #c8642e;background:#fff5e9;color:#765b4a;padding:10px 12px;margin-top:10px;font-size:12px}.ok{border-left:4px solid var(--green);background:#eef8f6;color:#315866;padding:10px 12px;margin-top:10px;font-size:12px}.footer{color:var(--muted);font-size:11px;line-height:1.45;text-align:center;padding:8px 10px 0}@media(max-width:520px){.fields,.results,.actions{grid-template-columns:1fr}main{padding:15px 10px 28px}.card{padding:14px}.hero-result strong{font-size:29px}}
+  </style>
+</head>
+<body>
+<header><div class="brand"><b>VERTEX</b> / ENGINE</div><div class="sub">CALCULADORA TÉCNICA MOBILE</div></header>
+<main>
+  <section class="card"><h1>Calculadora de cordoalhas</h1><p class="intro">Use esta aplicação para estimar formação, seção, peso linear, passo, RPM, velocidade, calandra e custos de cordoalhas trançadas.</p><div class="notice"><b>Uso técnico interno.</b> Os resultados são teóricos até serem confirmados por amostra, peso por metro, dimensões e resistência.</div></section>
+  <section class="card"><h2>Formação</h2><label>Formação protegida<input id="formation" value="24x8//30" placeholder="Ex.: 24x8//30"></label><div class="fields" style="margin-top:10px"><label>Formato<select id="format"><option value="round">Redonda</option><option value="flat">Chata</option></select></label><label>Eficiência (%)<input id="efficiency" type="number" value="85" min="1" max="100" step="any"></label></div><div class="fields" style="margin-top:10px"><label>RPM<input id="rpm" type="number" value="43" min="0" step="any"></label><label>Passo (mm)<input id="pitch" type="number" value="50" min="0.1" step="any"></label></div><div class="actions"><button id="calculate">Calcular</button><button class="secondary" id="suggest">Sugerir máquina</button></div><div id="message"></div></section>
+  <section class="card"><h2>Calandra</h2><div class="fields"><label>Largura desejada (mm)<input id="width" type="number" value="12.7" min="0.1" step="any"></label><label>Ocupação (%)<input id="occupancy" type="number" value="85" min="1" max="100" step="any"></label></div><p class="intro">Para cordoalha redonda, os campos da calandra são ignorados.</p></section>
+  <section class="card"><h2>Custos</h2><div class="fields"><label>Volume (m)<input id="volume" type="number" value="1000" min="0" step="any"></label><label>Preço do fio (R$/kg)<input id="wirePrice" type="number" value="55" min="0" step="any"></label></div><div class="fields" style="margin-top:10px"><label>Perdas (%)<input id="waste" type="number" value="3" min="0" step="any"></label><label>Impostos (%)<input id="tax" type="number" value="18" min="0" max="99" step="any"></label></div><div class="fields" style="margin-top:10px"><label>Mão de obra (R$/m)<input id="labor" type="number" value="2.5" min="0" step="any"></label><label>Energia + indiretos (R$/m)<input id="process" type="number" value="2" min="0" step="any"></label></div><label style="margin-top:10px">Margem sobre venda (%)<input id="margin" type="number" value="25" min="0" max="99" step="any"></label></section>
+  <section class="card"><h2>Ficha técnica calculada</h2><div class="hero-result"><small>Seção metálica</small><strong id="section">—</strong><span id="summary">—</span></div><div class="results"><div class="result"><small>Peso linear</small><strong id="weight">—</strong></div><div class="result"><small>Rendimento</small><strong id="yield">—</strong></div><div class="result"><small>Passo</small><strong id="pitchOut">—</strong></div><div class="result"><small>Ângulo</small><strong id="angle">—</strong></div><div class="result"><small>Velocidade efetiva</small><strong id="speed">—</strong></div><div class="result"><small>Resistência</small><strong id="resistance">—</strong></div><div class="result"><small>Material com perdas</small><strong id="material">—</strong></div><div class="result"><small>Preço sugerido</small><strong id="sale">—</strong></div></div><div id="calandraResult" class="ok" style="display:none"></div><div id="costResult" class="ok" style="display:none"></div></section>
+  <p class="footer">VERTEX Engine — ferramenta de apoio à engenharia e ao pré-custeio. Validar todos os parâmetros antes de fabricar ou cotar.</p>
+</main>
+<script src="vertex-engine.js"></script>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const number=id=>Number(String($(id).value).replace(',','.'))||0;
+  const br=(v,d=2)=>Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:d,maximumFractionDigits:d});
+  const money=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+  let lastSheet=null;
+  function calculate(){
+    const parsed=VertexEngine.parseFormation($('formation').value);
+    if(parsed.error){$('message').innerHTML='<div class="warning">'+parsed.error+'</div>';return;}
+    const sheet=VertexEngine.calculateTechnicalSheet({formation:parsed,format:$('format').value,pitch:number('pitch'),rpm:number('rpm'),efficiency:number('efficiency'),width:number('width'),occupancy:number('occupancy'),length:number('volume'),waste:number('waste')});
+    lastSheet=sheet;
+    $('section').textContent=br(sheet.section,4)+' mm²';
+    $('summary').textContent=sheet.totalWires+' fios · AWG '+br(sheet.awg,0)+' · Ø '+br(sheet.diameter,4)+' mm';
+    $('weight').textContent=br(sheet.linearWeightKgPerM,4)+' kg/m';
+    $('yield').textContent=br(sheet.yieldMPerKg,2)+' m/kg';
+    $('pitchOut').textContent=br(sheet.pitch,2)+' mm';
+    $('angle').textContent=br(sheet.angle,2)+'°';
+    $('speed').textContent=br(sheet.effectiveSpeed,2)+' m/h';
+    $('resistance').textContent=br(sheet.resistanceOhmPerKm,3)+' Ω/km';
+    $('material').textContent=br(sheet.materialKg,3)+' kg';
+    const costs=VertexEngine.calculateCosts(sheet,{volume:number('volume'),wirePrice:number('wirePrice'),waste:number('waste'),laborPerM:number('labor'),energyPerM:number('process'),indirectPerM:0,taxRate:number('tax'),marginRate:number('margin')});
+    $('sale').textContent=money(costs.suggestedSale);
+    $('costResult').style.display='block';$('costResult').innerHTML='<b>Custo total:</b> '+money(costs.totalCost)+' · material: '+money(costs.materialCost)+' · processo: '+money(costs.processCost)+' · horas estimadas: '+br(costs.hours,2)+' h';
+    if(sheet.calandra){$('calandraResult').style.display='block';$('calandraResult').innerHTML='<b>Calandra estimada:</b> largura '+br(sheet.calandra.width,2)+' mm · espessura '+br(sheet.calandra.thickness,2)+' mm · ocupação '+br(sheet.calandra.occupancy*100,0)+'%';}else $('calandraResult').style.display='none';
+    $('message').innerHTML='<div class="ok">Ficha calculada. Os valores podem ser refinados com dados medidos da máquina e da amostra.</div>';
+  }
+  function suggest(){
+    const parsed=VertexEngine.parseFormation($('formation').value);if(parsed.error)return calculate();
+    const result=VertexEngine.suggestMachine(parsed.groups.reduce((s,g)=>s+g.totalWires,0)*VertexEngine.wireArea(parsed.diameter),parsed.diameter,{pitch:number('pitch')});
+    const best=result.recommended;$('rpm').value=best.rpm;$('message').innerHTML='<div class="ok"><b>Sugestão:</b> máquina de '+best.machine+' fusos · '+best.distribution.text+' · '+br(best.actualSection,4)+' mm² · '+br(best.speed,1)+' m/h teóricos.</div>';calculate();
+  }
+  $('calculate').onclick=calculate;$('suggest').onclick=suggest;['formation','format','efficiency','rpm','pitch','width','occupancy','volume','wirePrice','waste','tax','labor','process','margin'].forEach(id=>$(id).addEventListener('change',calculate));
+  if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+  calculate();
+})();
+</script>
+</body>
+</html>
